@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odisha School Management Portal | Government of Odisha</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0070f3">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-container">
+            <div class="logo">📚</div>
+            <div class="loading-spinner"></div>
+            <p>Loading Real-Time School Management System...</p>
+        </div>
+    </div>
+
+    <!-- Main Application -->
+    <div id="mainApp" class="app-container hidden">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">📚 EduPortal</div>
+                <div class="status-indicator">🟢 LIVE</div>
+            </div>
+            <div class="header-right">
+                <div id="lastSync" class="sync-info">Last sync: --</div>
+                <button id="refreshBtn" class="refresh-btn">🔄 Refresh</button>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <button class="nav-item active" data-section="dashboard">🏠 Dashboard</button>
+            <button class="nav-item" data-section="schools">🏫 Schools</button>
+            <button class="nav-item" data-section="students">👨‍🎓 Students</button>
+            <button class="nav-item" data-section="analytics">📊 Analytics</button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <div class="page-header">
+                    <h1>Real-Time Dashboard</h1>
+                    <p>Live data from Odisha education system</p>
+                </div>
+                
+                <div class="kpi-grid" id="kpiGrid">
+                    <!-- KPI cards will be inserted here -->
+                </div>
+
+                <div class="charts-section">
+                    <div class="chart-container">
+                        <h3>Enrollment Trend (Last 6 Months)</h3>
+                        <canvas id="enrollmentChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>District Distribution</h3>
+                        <canvas id="districtChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>System Status</h3>
+                    <div id="systemStatus" class="status-cards">
+                        <!-- Status cards will be inserted here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Schools Section -->
+            <section id="schools" class="content-section">
+                <div class="page-header">
+                    <h1>Schools Management</h1>
+                    <p>8,000+ schools across Odisha</p>
+                </div>
+                
+                <div class="filters">
+                    <input type="text" id="schoolSearch" placeholder="Search schools...">
+                    <select id="districtFilter">
+                        <option value="">All Districts</option>
+                    </select>
+                    <button id="searchSchoolsBtn">Search</button>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>School Code</th>
+                                <th>School Name</th>
+                                <th>District</th>
+                                <th>Students</th>
+                                <th>Teachers</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schoolsTableBody">
+                            <!-- School rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="schoolsPagination">
+                    <!-- Pagination will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Students Section -->
+            <section id="students" class="content-section">
+                <div class="page-header">
+                    <h1>Student Records</h1>
+                    <p>50,000+ student profiles with live data</p>
+                </div>
+                
+                <div class="filters">
+                    <input type="text" id="studentSearch" placeholder="Search students...">
+                    <select id="schoolFilter">
+                        <option value="">All Schools</option>
+                    </select>
+                    <select id="classFilter">
+                        <option value="">All Classes</option>
+                        <option value="6">Class 6</option>
+                        <option value="7">Class 7</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                    </select>
+                    <button id="searchStudentsBtn">Search</button>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Admission No.</th>
+                                <th>Student Name</th>
+                                <th>Class</th>
+                                <th>School</th>
+                                <th>Guardian</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentsTableBody">
+                            <!-- Student rows will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="pagination" id="studentsPagination">
+                    <!-- Pagination will be inserted here -->
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="content-section">
+                <div class="page-header">
+                    <h1>Analytics & Insights</h1>
+                    <p>Real-time analytics and performance metrics</p>
+                </div>
+                
+                <div class="analytics-grid">
+                    <div class="metric-card">
+                        <h3>System Performance</h3>
+                        <div id="performanceMetrics">
+                            <!-- Performance metrics will be inserted here -->
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Data Quality</h3>
+                        <div id="dataQuality">
+                            <!-- Data quality metrics will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
